@@ -7,17 +7,31 @@ def home():
    if (request.method == "GET"):
       return render_template("index.html")
    else:
-      if (str(request.form["numero1"]) != "" and str(request.form["numero2"]) != ""):
+      if (request.form["numero1"] != "" and request.form["numero2"] != ""):
          num1 = request.form ["numero1"]
          num2 = request.form ["numero2"]
 
-         if (request.form == "mult"):
+         if (request.form['opc'] == "mult"):
             mult = int(num1) * int(num2)
-            return str(mult) 
+            return { 
+               "Resultado": str(mult)
+               }
 
+         elif (request.form['opc'] == "subt"):
+            subt = int(num1) - int(num2)
+            return {
+               "Resultado": str(subt)
+            }
+         elif (request.form['opc'] == "soma"):
+            soma = int(num1) + int(num2)
+            return {
+               "Resultado": str(soma)
+            }
          else:
             divi = int(num1) // int(num2)
-            return str(divi)            
+            return {
+               "Resultado": str(divi)
+            }
       else:
          return "Valor inválido!"   
 
